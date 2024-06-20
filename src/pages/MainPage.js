@@ -3,41 +3,49 @@ import styled from 'styled-components';
 import Headers from '../components/Headers';
 import Overview from '../components/Overview';
 import Description from '../components/Description';
-import { Info } from '@mui/icons-material';
 import InfoTable from '../components/InfoTable';
+
+
 
 const MainPageWrapper = styled.div`
   width: 100%;
-  min-height: 100vh;
   background: #cecece;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: 'bmdohyeon';
   font-size: 2.5vmin;
-
-  @media screen and (max-width: 500px) {
+  overflow-x:auto;
+  @media screen and (max-width: 768px) {
     font-size: 4vmin;
   }
+  
 `;
 
 const InfoContainer = styled.div`
   background: white ;
   padding: 10px;
-  margin: 0 20px;
-  width:100%
+  margin: 0 auto;
+  width: 100%;
+//   스크롤 바 안보이게!
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
 `;
 
 const Container = styled.div`
   position: relative;
-  background: white;
+  background: blue;
   padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content:space-between;
   width:60vw;
-  height:100vh;
   margin-top:30px;
+  @media screen and (max-width: 768px) {
+    flex-direction:column;
+  }
 `;
 
 const CommentContainer = styled.div`
@@ -47,10 +55,19 @@ const CommentContainer = styled.div`
   flex-direction: row;
 `;
 
+const TimeStampContainer = styled.div`
+  font-size:13px;
+  padding: 20px 0px;
+  color:grey;
+`;
+
 const TableAndOverView = styled.div`
     display:flex;
     flex-direction:row;
     justify-content:space-between;
+    @media screen and (max-width: 768px) {
+    flex-direction:column;
+  }
 `
 function MainPage() {
   return (
@@ -61,7 +78,11 @@ function MainPage() {
 
             <InfoContainer>
                 <h1>이름</h1>
-                {/* <p>최근 수정 시각:</p> */}
+                <TimeStampContainer>
+                    최근 수정 시각 : 2024-00:00:00:00
+                    {/* <p>최근 수정 시각:</p> */}
+                </TimeStampContainer>
+                
                 <TableAndOverView>
                     <Overview />
                     <InfoTable/>

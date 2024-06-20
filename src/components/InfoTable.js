@@ -10,7 +10,6 @@ const GreenTableCell = styled(TableCell)({
 });
 
 const Wrapper = styled('div')({
-    width: '30%',
   });
   
 
@@ -41,21 +40,18 @@ const InfoTable = () => {
           </TableRow>
           
           <TableRow>
-            <GreenTableCell>Green Cell</GreenTableCell>
-            <TableCell>Cell 2</TableCell>
+            <GreenTableCell>MBTI</GreenTableCell>
+            <TableCell>CUTE</TableCell>
           </TableRow>
           <TableRow>
-            <GreenTableCell>Green Cell</GreenTableCell>
-            <TableCell>Cell 2</TableCell>
+            <GreenTableCell>email</GreenTableCell>
+            <TableCell>cocoa389@naver.com</TableCell>
           </TableRow>
           <TableRow>
-            <GreenTableCell>Green Cell</GreenTableCell>
-            <TableCell>Cell 2</TableCell>
+            <GreenTableCell>GitHub</GreenTableCell>
+            <TableCell><a href='github.com/Wisdom-Kim'>Wisdom-Kim</a></TableCell>
           </TableRow>
-          <TableRow>
-            <GreenTableCell>Green Cell</GreenTableCell>
-            <TableCell>Cell 2</TableCell>
-          </TableRow>
+         
 
         </TableBody>
       </Table>
