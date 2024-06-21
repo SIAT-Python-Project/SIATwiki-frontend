@@ -110,9 +110,6 @@ function PersonPage() {
 
             <Description personId={id} />
           </InfoContainer>
-          {/* <CommentContainer>
-                댓글 컴포넌트 넣으면 됨
-                </CommentContainer> */}
         </Container>
       </MainPageWrapper>
     </div>
