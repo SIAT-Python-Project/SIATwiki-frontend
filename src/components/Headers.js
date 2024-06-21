@@ -72,7 +72,6 @@ export default function SearchAppBar() {
     getOptionLabel: (option) => option.name,
     onChange: (event, newValue) => {
       setValue(newValue ? newValue.name : '');
-      console.log(newValue)
     },
   });
 
@@ -88,6 +87,9 @@ export default function SearchAppBar() {
     if (personId) {
       document.location.href = `/person/${personId}`;
     }
+  else{
+    alert('해당 인물이 존재하지 않습니다!');
+  }
   };
 
   return (
