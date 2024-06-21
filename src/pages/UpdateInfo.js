@@ -5,6 +5,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { fetchSingleInfo, updateInfo } from '../api/FetchInfo';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
+import '../css/markdown.css'
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/a11y-dark.css";
+import rehypeRaw from "rehype-raw";
 
 const MainPageWrapper = styled.div`
   width: 100%;
@@ -120,7 +124,7 @@ function UpdateInfo() {
                         </UpdateForm>
 
                         <hr />
-                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight, rehypeRaw]}>
                             {markdwon}
                         </ReactMarkdown>
                     </UpdateContainer>
