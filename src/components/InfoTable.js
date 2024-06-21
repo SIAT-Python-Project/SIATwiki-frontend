@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { styled } from '@mui/system';
+import defaultImage from '../assets/default.jpg';
 
 const GreenTableCell = styled(TableCell)({
   backgroundColor: 'green',
@@ -47,7 +48,10 @@ const InfoTable = (data) => {
             {/* 이미지 셀 */}
             <TableRow>
               <TableCell colSpan={2} align="center">
-                <img width="300px" src={`http://localhost:8080/profile/${profile.filePath}`}></img>
+              <div>
+                {profile.filePath == null ? (<img width="300px" src={defaultImage} alt="default" />) : 
+                (<img width="300px" src={`http://localhost:8080/profile/${profile.filePath}`} alt="profile" />)}
+              </div>
               </TableCell>
             </TableRow>
 
