@@ -8,19 +8,22 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import { fetchPersonNames } from '../api/FetchPerson';
+import Autocomplete from '@mui/joy/Autocomplete';
+import FormControl from '@mui/joy/FormControl';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: 'white',
+  marginRight: theme.spacing(2),
   marginLeft: 0,
   color:'black',
   width: '100%',
   [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
+    marginLeft: theme.spacing(3),
     width: 'auto',
   },
-
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -35,22 +38,31 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
-  width: '100%',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
     },
   },
 }));
 
 export default function SearchAppBar() {
+  
+  const [value,setValue]= React.useState(""); //검색어
+  const [nameList,setNameList] = React.useState([]);
+  
+  React.useEffect(()=>{
+    fetchPersonNames().then(data=>setNameList(data));
+    console.log(nameList.map((data) => data.name)); 
+  }
+,[])
+
+  const handlePersonPage=(e)=>{
+  }
+
   return (
     <Box sx={{ flexGrow: 1, width: '100vw' }}>
       <AppBar position="static" sx={{ bgcolor: 'green',padding:'0 10px' }}>
@@ -76,10 +88,15 @@ export default function SearchAppBar() {
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="누구를 찾아볼까요?"
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            <FormControl id="free-solo-demo">
+              <Autocomplete
+                autoSelect
+                
+                freeSolo
+                placeholder="누구를 검색해볼까요?"
+                options={nameList.map((data) => data.name)}
+              />
+            </FormControl>
           </Search>
         </Toolbar>
       </AppBar>

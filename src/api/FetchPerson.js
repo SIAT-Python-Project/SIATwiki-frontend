@@ -8,6 +8,14 @@ export async function fetchPersonProfile(personId) {
     return data;
 }
 
+//GET(LIST)
+export async function fetchPersonNames() {
+    const response = await axios.get(`/api/person`);
+    const data = await response.data;
+
+    return data;
+}
+
 //PUT
 export async function updatePersonProfile(personId, updatedContent) {
     try {
