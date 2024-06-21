@@ -13,7 +13,12 @@ const Wrapper = styled('div')({
   });
   
 
-const InfoTable = () => {
+const InfoTable = (data) => {
+  //data: {data(객체)}로 받아와져서, 한 번 풀어줘야함 ..ㅠ ..
+  const profile= data.data;
+  //profile.github.split('/')[3]로 받아올 때 자꾸 제대로 받아오지 못하는 오류가 있어서 텍스트로 대체합니다
+  const githubId = "깃허브 링크";
+  
   return (
 
     /*
@@ -28,7 +33,7 @@ const InfoTable = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <GreenTableCell colSpan={2}>이름</GreenTableCell>
+            <GreenTableCell colSpan={2}>{profile.name}</GreenTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -41,15 +46,15 @@ const InfoTable = () => {
           
           <TableRow>
             <GreenTableCell>MBTI</GreenTableCell>
-            <TableCell>CUTE</TableCell>
+            <TableCell>{profile.mbti}</TableCell>
           </TableRow>
           <TableRow>
             <GreenTableCell>email</GreenTableCell>
-            <TableCell>cocoa389@naver.com</TableCell>
+            <TableCell>{profile.email}</TableCell>
           </TableRow>
           <TableRow>
             <GreenTableCell>GitHub</GreenTableCell>
-            <TableCell><a href='github.com/Wisdom-Kim'>Wisdom-Kim</a></TableCell>
+            <TableCell><a href={profile.github}>{githubId}</a></TableCell>
           </TableRow>
          
 
