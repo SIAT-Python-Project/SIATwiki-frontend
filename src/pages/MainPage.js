@@ -67,19 +67,14 @@ const TableAndOverView = styled.div`
 
 
 
-function PersonPage() {
+function MainPage() {
 
   const [data, setData] = useState({});
-
 
   const params = useParams();
   const id = params.id;
 
   //최초 실행시 데이터 받아오기
-  useEffect(() => {
-    fetchPersonProfile(id).then(data => setData(data));
-  }
-    , []);
 
   return (
     <div>
@@ -87,26 +82,13 @@ function PersonPage() {
       <MainPageWrapper>
         <Container>
 
-          <InfoContainer>
-            <h1>{data.name}</h1>
-            <TimeStampContainer>
-              {/* 최근 수정 시각 : 2024-00:00:00:00
-                    TODO: 회의 때 PersonResponseDTO에 updatedDate 필드 추가 예고 */}
-              {/* <p>최근 수정 시각:</p> */}
-            </TimeStampContainer>
-
-            <TableAndOverView>
-              <Overview />
-              <InfoTable data={data} />
-            </TableAndOverView>
-
-
-            <Description personId={id} />
-          </InfoContainer>
+          <h1>
+            안녕하세요ㅋㅋ ㅎㅎ
+          </h1>
         </Container>
       </MainPageWrapper>
     </div>
   );
 }
 
-export default PersonPage;
+export default MainPage;
