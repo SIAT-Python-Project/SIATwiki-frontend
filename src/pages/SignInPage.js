@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { fetchUserLogin } from '../api/FectUser';
+import { useCookies } from "react-cookie";
 
 
 
@@ -37,6 +38,7 @@ function Copyright(props) {
 
 export default function SingInPage({ data }) {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
+  const [cookies, setCookie, removeCookie] = useCookies(['name']);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -48,8 +50,10 @@ export default function SingInPage({ data }) {
     event.preventDefault();
     data = new FormData(event.currentTarget);
     fetchUserLogin(userLogin.email, userLogin.password)
-      .then(() => {
-        navigate('/');
+      .then((name) => {
+        console.log(name)
+        // setCookie('name', name, { path: '#' });
+        // navigate('#');
       })
       .catch(error => {
         alert("아이디 또는 패스워드가 맞지 않습니다");
@@ -72,7 +76,7 @@ export default function SingInPage({ data }) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            로그인
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
