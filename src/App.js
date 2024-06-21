@@ -11,9 +11,9 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainPage />}></Route>
-          <Route path="/sign-up" element={<SignUpPage />}></Route>
-          <Route path="/sign-in" element={<SingInPage />}></Route>
+            <Route path="/" element = {<MainPage/>}></Route>
+            <Route path="/api/sign-up" element = {<SignUpPage/>}></Route>
+            <Route path="/api/login" element = {<SingInPage/>}></Route>
           <Route path='/info/update/:infoId' element={<UpdateInfo />} />
         </Routes>
       </BrowserRouter>
