@@ -12,6 +12,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { fetchUserLogin } from '../api/FectUser';
+import { useCookies } from "react-cookie";
+
+
+
+const defaultTheme = createTheme();
 
 function Copyright(props) {
   return (
@@ -28,16 +36,28 @@ function Copyright(props) {
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
-const defaultTheme = createTheme();
+export default function SingInPage({ data }) {
+  const [userLogin, setUserLogin] = useState({ email: "", password: "" });
+  const [cookies, setCookie, removeCookie] = useCookies(['name']);
+  const navigate = useNavigate();
 
-export default function SingInPage() {
+  const handleInputChange = (e) => {
+    setUserLogin((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    data = new FormData(event.currentTarget);
+    fetchUserLogin(userLogin.email, userLogin.password)
+      .then((name) => {
+        console.log(name)
+        // setCookie('name', name, { path: '#' });
+        // navigate('#');
+      })
+      .catch(error => {
+        alert("아이디 또는 패스워드가 맞지 않습니다");
+      });
   };
 
   return (
@@ -56,7 +76,7 @@ export default function SingInPage() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            로그인
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -64,6 +84,8 @@ export default function SingInPage() {
               required
               fullWidth
               id="email"
+              value={userLogin.email}
+              onChange={handleInputChange}
               label="Email Address"
               name="email"
               autoComplete="email"
@@ -74,6 +96,8 @@ export default function SingInPage() {
               required
               fullWidth
               name="password"
+              value={userLogin.password}
+              onChange={handleInputChange}
               label="Password"
               type="password"
               id="password"
@@ -92,14 +116,14 @@ export default function SingInPage() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
+              {/* <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
-              </Grid>
+              </Grid> */}
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/sign-up" variant="body2">
+                  {"회원가입"}
                 </Link>
               </Grid>
             </Grid>
