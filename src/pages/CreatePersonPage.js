@@ -42,15 +42,13 @@ export default function SignIn() {
   return (
     
       <Container component="main" maxWidth="xs">
-        <Headers></Headers> 
+        
         <Box
           sx={{
-            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-          }}
-        >
+          }}><Headers></Headers> 
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
