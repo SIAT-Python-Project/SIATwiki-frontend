@@ -69,7 +69,7 @@ const TableAndOverView = styled.div`
     flex-direction:column;
   }
 `
-function MainPage() {
+function PersonPage() {
   return (
     <div>
       <Headers />
@@ -100,4 +100,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default PersonPage;
