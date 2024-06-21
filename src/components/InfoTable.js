@@ -16,7 +16,8 @@ const Wrapper = styled('div')({
 const InfoTable = (data) => {
   //data: {data(객체)}로 받아와져서, 한 번 풀어줘야함 ..ㅠ ..
   const profile= data.data;
-  const githubId = profile.github.split('/')[3];
+  //profile.github.split('/')[3]로 받아올 때 자꾸 제대로 받아오지 못하는 오류가 있어서 텍스트로 대체합니다
+  const githubId = "깃허브 링크";
   
   return (
 
