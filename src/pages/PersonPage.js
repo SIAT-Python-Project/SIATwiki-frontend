@@ -71,9 +71,13 @@ const TableAndOverView = styled.div`
     flex-direction:column;
   }
 `
+
+
+
 function PersonPage() {
 
   const [data, setData] = useState({});
+
 
   const params = useParams();
   const id = params.id;
