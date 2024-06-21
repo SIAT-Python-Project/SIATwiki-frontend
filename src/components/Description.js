@@ -4,11 +4,11 @@ import Typography from '@mui/material/Typography';
 import { fetchPersonInfo } from '../api/FetchInfo';
 import Info from './Info';
 
-const Description = () => {
+const Description = ({ personId }) => {
   const [infos, setInfos] = useState([]);
 
   useEffect(() => {
-    const data = fetchPersonInfo(1);
+    const data = fetchPersonInfo(personId);
     data.then(result => setInfos(result))
   }, []);
   return (
