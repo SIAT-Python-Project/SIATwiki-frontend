@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -12,6 +10,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { MenuItem, Select } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { fetchUserSingup } from '../api/FectUser';
 
 function Copyright(props) {
   return (
@@ -31,14 +33,27 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUpPage() {
+  const [userLogin, setUserLogin] = useState({ name: "", email: "", password: ""});
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    setUserLogin((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    fetchUserSingup(userLogin.name, userLogin.email, userLogin.password)
+      .then(() => {
+        navigate('/login');
+      })
+      .catch(error => {
+        alert("이메일이 있습니다");
+      });
+
   };
+
+
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -56,28 +71,18 @@ export default function SignUpPage() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            회원가입
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
+                  id="name"
+                  label="name"
+                  name="name"
+                  onChange={handleInputChange}
                   autoComplete="family-name"
                 />
               </Grid>
@@ -88,6 +93,7 @@ export default function SignUpPage() {
                   id="email"
                   label="Email Address"
                   name="email"
+                  onChange={handleInputChange}
                   autoComplete="email"
                 />
               </Grid>
@@ -99,15 +105,11 @@ export default function SignUpPage() {
                   label="Password"
                   type="password"
                   id="password"
+                  onChange={handleInputChange}
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
+
             </Grid>
             <Button
               type="submit"
@@ -118,9 +120,9 @@ export default function SignUpPage() {
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
+              <Grid item >
+                <Link href="/login" variant="body2">
+                  로그인
                 </Link>
               </Grid>
             </Grid>
