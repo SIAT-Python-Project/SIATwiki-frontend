@@ -46,7 +46,8 @@ const CreateInfoTable = (profileInfo,setProfileInfo) => {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         setProfileImg(reader.result);
-        };
+      };
+      
   };
   const handleSubmit = async () => {
 
@@ -58,7 +59,7 @@ const CreateInfoTable = (profileInfo,setProfileInfo) => {
       "userId":1 //TODO: userId 불러오는 로직 필요함ㅠㅠ
     };
 
-    const userId = createPersonProfile(profileData,profileImg)
+    const userId = createPersonProfile(profileData,imgRef.current.files[0])
                     .then(data => document.location.href=`/person/${data.id}`);
   }
 
