@@ -1,89 +1,83 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import Headers from '../components/Headers';
+import CreateInfoTable from '../components/CreateInfoTable';
 
-function Copyright(props) {
+
+
+const MainPageWrapper = styled.div`
+  width: 100%;
+  background: #cecece;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'bmdohyeon';
+  font-size: 2.5vmin;
+  overflow-x:auto;
+  height:100vh;
+  @media screen and (max-width: 768px) {
+    font-size: 4vmin;
+  }
+  
+`;
+
+const MainInfoContainer = styled.div`
+    background:white;
+    padding:10px;
+    border-radius:10px;
+
+`;
+
+
+const Container = styled.div`
+  background: blue;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top:30px;
+  width:80%;
+  justify-content:center;
+  @media screen and (max-width: 768px) {
+    flex-direction:column;
+  }
+`;
+
+const TimeStampContainer = styled.div`
+  font-size:13px;
+  padding: 20px 0px;
+  color:grey;
+`;
+
+const TableWrapper = styled.div`
+  background: white ;
+  padding: 10px;
+  margin: 0 300px;
+
+`;
+
+
+
+function MainPage() {
+//부모에서 객체수정 함수를 받아와야함~
+  const [data, setData] = useState({});
+
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
-
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
-  return (
-    
-      <Container component="main" maxWidth="xs">
+    <div>
+      
+      <MainPageWrapper>
+      <Headers />
+        <Container>
         
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}><Headers></Headers> 
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
+        <MainInfoContainer>
+            <TableWrapper>
+            <h3> 새로운 인물을 등록하고 싶나요?</h3>
+                <CreateInfoTable></CreateInfoTable>
+            </TableWrapper>
+        </MainInfoContainer>
+        </Container>
+      </MainPageWrapper>
+    </div>
   );
 }
+
+export default MainPage;
