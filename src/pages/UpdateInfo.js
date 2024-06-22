@@ -92,13 +92,14 @@ function UpdateInfo() {
     const textarea = useRef();
     const navigate = useNavigate();
 
+
     const UpdateInfoHandler = (e) => {
         e.preventDefault();
         updateInfo(params.infoId, {
             content: textarea.current.value
-        });
+        }).then((data)=>{navigate(`/person/${data.personId}`)});
 
-        navigate('/');
+        
     }
 
     useEffect(() => {
