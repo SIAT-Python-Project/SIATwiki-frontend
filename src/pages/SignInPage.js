@@ -49,6 +49,7 @@ export default function SingInPage({ data }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     data = new FormData(event.currentTarget);
+    
     fetchUserLogin(userLogin.email, userLogin.password)
       .then((response) => {
         setCookie('name', encodeURIComponent(response.name));
