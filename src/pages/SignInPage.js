@@ -38,7 +38,7 @@ function Copyright(props) {
 
 export default function SingInPage({ data }) {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
-  const [cookies, setCookie, removeCookie] = useCookies(['name']);
+  const [cookies, setCookie, removeCookie] = useCookies(['name','email','id']);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -50,10 +50,11 @@ export default function SingInPage({ data }) {
     event.preventDefault();
     data = new FormData(event.currentTarget);
     fetchUserLogin(userLogin.email, userLogin.password)
-      .then((name) => {
-        console.log(name)
-        // setCookie('name', name, { path: '#' });
-        // navigate('#');
+      .then((response) => {
+        setCookie('name', encodeURIComponent(response.name));
+        setCookie('email', response.email);
+        setCookie('id',response.id)
+        navigate(`/person/${response.id}`);
       })
       .catch(error => {
         alert("아이디 또는 패스워드가 맞지 않습니다");

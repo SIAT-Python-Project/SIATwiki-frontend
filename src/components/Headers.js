@@ -10,6 +10,7 @@ import { fetchPersonNames } from '../api/FetchPerson';
 import { Button, Input } from '@mui/joy';
 import { useAutocomplete } from '@mui/base/useAutocomplete';
 import mainLogo from '../assets/mainLogo.png';
+import { fetchUserList } from '../api/FectUser';
 
 const InputWrapper = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -53,9 +54,29 @@ const CustomButton = styled(Button)(({ theme }) => ({
 
 export default function SearchAppBar() {
   const [personList, setPersonList] = React.useState([]);
+  const [userList, setUserList] = React.useState([]);
   const [value, setValue] = React.useState(''); // 검색어 상태 추가
+  const [userCookie, setUserCookie] = React.useState(null);
+
+  
   React.useEffect(() => {
     fetchPersonNames().then((data) => setPersonList(data));
+  }, []);
+
+  React.useEffect(()=>{
+    fetchUserList().then((data) => setUserList(data))
+  },[])
+
+  React.useEffect(() => {
+    // 쿠키에서 사용자 정보 가져오기
+    const userEmail = getCookie('email');
+    const userName = getCookie('name');
+    const userId = getCookie('id');
+
+    // 쿠키에 사용자 정보가 있는 경우, 쿠키 상태 업데이트
+    if (userEmail && userName && userId) {
+      setUserCookie({ email: userEmail, name: decodeURIComponent(userName), id: userId });
+    }
   }, []);
 
   const {
@@ -93,6 +114,23 @@ export default function SearchAppBar() {
   }
   };
 
+  const logoutHandleSubmit = (event) => {
+    event.preventDefault();
+    fetch('/api/logout', { method: 'POST' })
+      .then(() => {
+        setUserCookie(null);
+        document.location.href = '/';
+      })
+  };
+
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  };
+
+
   return (
     <Box sx={{ flexGrow: 1, width: '100vw' }}>
       <AppBar position="static" sx={{ bgcolor: 'green', padding: '0 10px' }}>
@@ -100,7 +138,7 @@ export default function SearchAppBar() {
           <Button padding={"0 3vw"} onClick={()=>{document.location.href="/"}} color='transparent'>
             <img src={mainLogo} width={"100px"} />
           </Button>
-          <Typography
+          < Typography
             variant="h5"
             noWrap
             component="div"
@@ -129,12 +167,36 @@ export default function SearchAppBar() {
           <CustomButton type="submit" variant="contained" color="primary" onClick={submitHandler}>
             검색
           </CustomButton>
-          <CustomButton variant="contained" color="neutral">
+          {userCookie != null ? (
+            <>
+              <Typography variant="contained" color="neutral">
+                {userCookie.name}
+              </Typography>
+              <CustomButton variant="contained" color="neutral" onClick={logoutHandleSubmit}>
+                LOGOUT
+              </CustomButton>
+            </>
+          ) : (
+            <>
+              <CustomButton variant="contained" color="neutral" onClick={() => { document.location.href = "/login" }}>
+                LOGIN
+              </CustomButton>
+              <CustomButton variant="contained" color="neutral" onClick={() => { document.location.href = "/sign-up" }}>
+                SIGN IN
+              </CustomButton>
+            </>
+          )}
+
+
+
+
+
+          {/* <CustomButton variant="contained" color="neutral" onClick={() => { document.location.href = "/login" }}>
             LOGIN
           </CustomButton>
           <CustomButton variant="contained" color="neutral">
             SIGN IN
-          </CustomButton>
+          </CustomButton> */}
         </Toolbar>
       </AppBar>
     </Box>
