@@ -6,6 +6,7 @@ import Description from '../components/Description';
 import InfoTable from '../components/InfoTable';
 import { fetchPersonProfile } from '../api/FetchPerson';
 import { useParams } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 
 
@@ -85,6 +86,9 @@ function MainPage() {
           <h1>
             안녕하세요ㅋㅋ ㅎㅎ
           </h1>
+
+          관리자이신가요?
+          <Button onClick={()=>{document.location.href="/person/creation"}}>인물 생성</Button>
         </Container>
       </MainPageWrapper>
     </div>
