@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
+import { fetchCategoryNames } from '../api/FetchCategory';
 
 const Wrapper = styled.div`
   background: white;
@@ -16,29 +17,27 @@ const Wrapper = styled.div`
 `;
 
 const Overview = () => {
+  
+  const [names,setNames] = useState([]);
+
+  useEffect(() => {
+    fetchCategoryNames()
+    .then(data => setNames(data))
+    .then(names.sort((a,b)=>a.order - b.order)); //order 순으로 정렬
+  }
+    , [names]);
+
   return (
     <Wrapper>
       <Typography variant="h5" component="h2">
         목차<br/>
       </Typography>
       <Typography component="p">
-        <ul>
-          <li>
-            기술 스펙
-          </li>
-          <li>
-            프로젝트 성향
-          </li>
-          <li>
-            좋아하는 팀원
-          </li>
-          <li>
-            논란
-          </li>
-          <li>
-            여담
-          </li>
-        </ul>
+      <ul style={{'list-style-type':"none"}}>
+        {names && names.map((name) => (
+          <li key={name.order}>{name.order+1}.{name.krName}</li>
+        ))}
+      </ul>
       </Typography>
     </Wrapper>
   );
