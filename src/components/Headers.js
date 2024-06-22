@@ -10,9 +10,8 @@ import { fetchPersonNames } from '../api/FetchPerson';
 import { Button, Input } from '@mui/joy';
 import { useAutocomplete } from '@mui/base/useAutocomplete';
 import mainLogo from '../assets/mainLogo.png';
-import { fetchLogout, fetchUserList, fetchUserLogin } from '../api/FectUser';
-import { navigator } from 'react-router-dom';
-import { Cookies } from 'react-cookie';
+import { fetchLogout, fetchUserList} from '../api/FectUser';
+
 
 const InputWrapper = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -75,9 +74,11 @@ export default function SearchAppBar() {
     const userName = getCookie('name');
     const userId = getCookie('id');
 
-    // 쿠키에 사용자 정보가 있는 경우, 쿠키 상태 업데이트
+    // 쿠키 상태 업데이트
     if (userEmail && userName && userId) {
       setUserCookie({ email: userEmail, name: decodeURIComponent(userName), id: userId });
+    } else {
+      setUserCookie(null);
     }
   }, []);
 
@@ -121,17 +122,30 @@ export default function SearchAppBar() {
   const logoutHandleSubmit = (event) => {
     event.preventDefault();
     fetchLogout().then(() => {
+
       setUserCookie(null);
+
+
+      // 쿠키 삭제
+      deleteCookie('email');
+      deleteCookie('name');
+      deleteCookie('id');
       document.location.href = '/';
     });
   };
 
+// 쿠키 삭제 함수
+  const deleteCookie = (name) => {
+    document.cookie = `${name}=; Max-Age=-1; path=/`;
+  };
+// 쿠키 가져오는 함수
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
     return null;
   };
+
 
 
   return (
@@ -190,17 +204,6 @@ export default function SearchAppBar() {
               </CustomButton>
             </>
           )}
-
-
-
-
-
-          {/* <CustomButton variant="contained" color="neutral" onClick={() => { document.location.href = "/login" }}>
-            LOGIN
-          </CustomButton>
-          <CustomButton variant="contained" color="neutral">
-            SIGN IN
-          </CustomButton> */}
         </Toolbar>
       </AppBar>
     </Box>
