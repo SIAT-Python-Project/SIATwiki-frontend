@@ -13,3 +13,10 @@ export async function fetchUserSingup(checkName, checkEmail, checkPassword) {
 
     return data;
 }
+
+export async function fetchUserList() {
+    const response = await axios.post(`/api/userFind`);
+    const data = await response.data;
+
+    return data;
+}
