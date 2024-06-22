@@ -10,7 +10,9 @@ import { fetchPersonNames } from '../api/FetchPerson';
 import { Button, Input } from '@mui/joy';
 import { useAutocomplete } from '@mui/base/useAutocomplete';
 import mainLogo from '../assets/mainLogo.png';
-import { fetchUserList } from '../api/FectUser';
+import { fetchLogout, fetchUserList, fetchUserLogin } from '../api/FectUser';
+import { navigator } from 'react-router-dom';
+import { Cookies } from 'react-cookie';
 
 const InputWrapper = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -79,6 +81,7 @@ export default function SearchAppBar() {
     }
   }, []);
 
+
   const {
     getInputProps,
     getListboxProps,
@@ -114,13 +117,13 @@ export default function SearchAppBar() {
   }
   };
 
+
   const logoutHandleSubmit = (event) => {
     event.preventDefault();
-    fetch('/api/logout', { method: 'POST' })
-      .then(() => {
-        setUserCookie(null);
-        document.location.href = '/';
-      })
+    fetchLogout().then(() => {
+      setUserCookie(null);
+      document.location.href = '/';
+    });
   };
 
   const getCookie = (name) => {
@@ -167,7 +170,8 @@ export default function SearchAppBar() {
           <CustomButton type="submit" variant="contained" color="primary" onClick={submitHandler}>
             검색
           </CustomButton>
-          {userCookie != null ? (
+ 
+          {userCookie ? (
             <>
               <Typography variant="contained" color="neutral">
                 {userCookie.name}
@@ -178,7 +182,7 @@ export default function SearchAppBar() {
             </>
           ) : (
             <>
-              <CustomButton variant="contained" color="neutral" onClick={() => { document.location.href = "/login" }}>
+            <CustomButton variant="contained" color="neutral" onClick={() => { document.location.href = "/login" }}>
                 LOGIN
               </CustomButton>
               <CustomButton variant="contained" color="neutral" onClick={() => { document.location.href = "/sign-up" }}>
