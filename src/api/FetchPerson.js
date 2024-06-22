@@ -29,7 +29,6 @@ export async function updatePersonProfile(personId, updatedContent) {
 //POST
 export async function createPersonProfile(createdContent,imgFile) {
     const formData = new FormData();
-    let userInfo;
 
     // 이미지 파일 추가
     if (imgFile != null) {
@@ -41,16 +40,17 @@ export async function createPersonProfile(createdContent,imgFile) {
     formData.append('person', new Blob([profileInfoJSON], { type: 'application/json' }));
 
     try {
-        const response = await axios.post('/api/person', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        }).then((res)=> userInfo =res.data); //리턴 \
+        const response = await axios.post('/api/person'
+                                        , formData
+                                        , {headers: {'Content-Type': 'multipart/form-data'}}
+                                        );
+            
+        const userInfo = await response.data;
+        return userInfo; 
     } catch (e) {
         console.error('Error:', e);
     }
 
-    return userInfo; 
 }
 
 //DELETE
