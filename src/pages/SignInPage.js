@@ -52,6 +52,7 @@ export default function SingInPage({ data }) {
     
     fetchUserLogin(userLogin.email, userLogin.password)
       .then((response) => {
+        // 쿠키 설정
         setCookie('name', encodeURIComponent(response.name));
         setCookie('email', response.email);
         setCookie('id',response.id)
