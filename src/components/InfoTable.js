@@ -4,10 +4,10 @@ import { styled } from '@mui/system';
 import defaultImage from '../assets/default.jpg';
 
 const GreenTableCell = styled(TableCell)({
-  backgroundColor: 'green',
+  backgroundColor: '#439F86',
   color: 'white',
+  fontWeight:'bold',
   textAlign: 'center',
-  color: 'black'
 });
 
 
@@ -18,6 +18,7 @@ const ImgWrapper = styled('div')({
 })
 
 const Wrapper = styled('div')({
+  
 });
 
 
@@ -41,7 +42,7 @@ const InfoTable = (data) => {
         <Table>
           <TableHead>
             <TableRow>
-              <GreenTableCell colSpan={2}>{profile.name}</GreenTableCell>
+              <GreenTableCell colSpan={2} style={{fontSize:'1.2rem', fontWeight:'bold'}}>{profile.name}</GreenTableCell>
             </TableRow>
           </TableHead>
           <TableBody>

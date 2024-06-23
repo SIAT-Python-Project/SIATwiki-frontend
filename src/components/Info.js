@@ -16,12 +16,13 @@ const InfoHeader = styled.div`
 const MyBtn = styled.button`
     border: none;
     background-color: white;
+    cursor:pointer;
+    color:grey;
 `;
 
 export default function Info({ data }) {
 
     const navigate = useNavigate();
-
 
 
     return (

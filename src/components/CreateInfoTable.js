@@ -5,7 +5,7 @@ import defaultImage from '../assets/default.jpg';
 import { Input } from '@mui/joy';
 import { createPersonProfile } from '../api/FetchPerson';
 const GreenTableCell = styled(TableCell)({
-  backgroundColor: 'green',
+  backgroundColor: '#439F86',
   color: 'white',
   textAlign: 'center',
   color: 'black'

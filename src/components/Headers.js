@@ -3,13 +3,11 @@ import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import MenuIcon from '@mui/icons-material/Menu';
 import { fetchPersonNames } from '../api/FetchPerson';
 import { Button, Input } from '@mui/joy';
 import { useAutocomplete } from '@mui/base/useAutocomplete';
-import mainLogo from '../assets/mainLogo.png';
+import mainLogo  from '../assets/mainLogo.png';
 import { fetchLogout, fetchUserList } from '../api/FectUser';
 
 
@@ -144,11 +142,11 @@ export default function SearchAppBar() {
 
 
   return (
-    <Box sx={{ flexGrow: 1, width: '100vw' }}>
-      <AppBar position="static" sx={{ bgcolor: 'green', padding: '0 10px' }}>
+    <Box sx={{ flexGrow: 1, width: '100%' }}>
+      <AppBar position="static" sx={{ bgcolor: '#439F86', padding: '0 10px' }}>
         <Toolbar>
           <Button padding={"0 3vw"} onClick={() => { document.location.href = "/" }} color='transparent'>
-            <img src={mainLogo} width={"100px"} />
+            <img src={mainLogo} width={"50px"} />
           </Button>
           < Typography
             variant="h5"

@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Box, Button, Container } from '@mui/material';
 import BaseComponent from '../components/BaseComponents';
 
-
-const TimeStampContainer = styled.div`
-  font-size:13px;
-  padding: 20px 0px;
-  color:grey;
-`;
-
-const TableAndOverView = styled.div`
+const WrapperContainer = styled.div`
+    height:100vh; 
     display:flex;
-    flex-direction:row;
-    justify-content:space-between;
-    @media screen and (max-width: 768px) {
-    flex-direction:column;
-  }
+    flexDirection:column;
+    justifyContent:center
 `
-
-
+const Title = styled.div`
+    padding: 30px 0;
+    font-weight:bold
+`
 
 function MainPage() {
 
@@ -32,9 +25,51 @@ function MainPage() {
   //최초 실행시 데이터 받아오기
 
   return (
-   <BaseComponent>
-        제가 보이세요?
-    </BaseComponent>
+    <BaseComponent>
+    <div style={{width:'100%'}}>
+    <WrapperContainer>
+      <Container component="main" maxWidth="xs" style={{textAlign:'center', fontSize:'1rem'}}>
+        
+        <Title>씨앗 위키에 오신 것을 환영합니다!</Title>
+        <hr></hr>
+        <Box padding={'10px 0'}></Box>
+        <Title>기획 의도</Title>
+
+        파이널 프로젝트를 <br></br>약 2주간 남긴 상황에서
+        <Box padding={'10px 0'}></Box>
+        아직 서로는 서로가 <br></br> 일하는 스타일이 어떤지,
+        <Box padding={'10px 0'}></Box>
+        어떤 기술 스택에 관심있어 하는지
+        <br></br>
+        알 기회가 없었습니다...🤔
+        <Box padding={'10px 0'}></Box>
+        <br></br>
+        내 정보를 알기 쉽게 문서화해보면 어떨까요?
+
+
+        <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, background:"#439F86"}}
+              onClick={()=>{document.location.href='/person/creation'}}
+            >
+                
+            이참에 적어봐요!
+        </Button>
+        <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, background:"#439F86"}}
+            >
+                
+            기존 정보 검색은 상단에!
+        </Button>
+      </Container>
+    </WrapperContainer>
+    </div>
+  </BaseComponent>
   );
 }
 

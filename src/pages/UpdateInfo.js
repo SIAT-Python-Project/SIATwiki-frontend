@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Headers from '../components/Headers';
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchSingleInfo, updateInfo } from '../api/FetchInfo';
 import ReactMarkdown from "react-markdown";

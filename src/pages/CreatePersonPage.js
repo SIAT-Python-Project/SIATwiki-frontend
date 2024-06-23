@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Headers from '../components/Headers';
 import CreateInfoTable from '../components/CreateInfoTable';
-import MainPageWrapper from '../components/MainPageWrapper';
 import BaseComponent from '../components/BaseComponents';
 
 
