@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -37,7 +38,7 @@ function Copyright(props) {
 // TODO remove, this demo shouldn't need to reset the theme.
 
 export default function SingInPage({ data }) {
-  const [userLogin, setUserLogin] = useState({ email: "", password: "" });
+  const [userLogin, setUserLogin] = useState({ email: "", password: "", id: "" });
   const [cookies, setCookie, removeCookie] = useCookies(['name','email','id']);
   const navigate = useNavigate();
 
@@ -46,22 +47,26 @@ export default function SingInPage({ data }) {
   };
 
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    data = new FormData(event.currentTarget);
     
-    fetchUserLogin(userLogin.email, userLogin.password)
+    fetchUserLogin(userLogin.email, userLogin.password, userLogin.id)
       .then((response) => {
+        // const encryptedId = encrypt(response.id);
         // 쿠키 설정
         setCookie('name', encodeURIComponent(response.name));
         setCookie('email', response.email);
-        setCookie('id',response.id)
-        navigate(`/person/${response.id}`);
+        setCookie('id', response.id)
+        navigate(`/`);
       })
       .catch(error => {
         alert("아이디 또는 패스워드가 맞지 않습니다");
       });
   };
+
+  // const encrypt = (value) => {
+  //   return value; 
+  // };
 
   return (
     <ThemeProvider theme={defaultTheme}>
