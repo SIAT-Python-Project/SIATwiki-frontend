@@ -77,7 +77,12 @@ function PersonPage() {
 
   //최초 실행시 데이터 받아오기
   useEffect(() => {
-    fetchPersonProfile(id).then(data => setData(data));
+    fetchPersonProfile(id)
+      .then(data => setData(data))
+      .catch(error => {
+        document.location.href = '/';
+        alert(error.response.data.message);
+      });
   }
     , []);
 

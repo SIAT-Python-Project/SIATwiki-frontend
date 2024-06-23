@@ -97,9 +97,9 @@ function UpdateInfo() {
         e.preventDefault();
         updateInfo(params.infoId, {
             content: textarea.current.value
-        }).then((data)=>{navigate(`/person/${data.personId}`)});
-
-        
+        }).then((data) => {
+            navigate(`/person/${data.personId}`)
+        }).catch(error => alert(error.response.data.message));
     }
 
     useEffect(() => {

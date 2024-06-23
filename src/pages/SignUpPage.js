@@ -30,7 +30,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUpPage() {
-  const [userLogin, setUserLogin] = useState({ name: "", email: "", password: ""});
+  const [userLogin, setUserLogin] = useState({ name: "", email: "", password: "" });
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -44,7 +44,7 @@ export default function SignUpPage() {
         navigate('/login');
       })
       .catch(error => {
-        alert("이메일이 있습니다");
+        alert(error.response.data.message);
       });
 
   };

@@ -15,14 +15,8 @@ export async function fetchSingleInfo(infoId) {
 }
 
 export async function updateInfo(infoId, info) {
-    let updateResult;
-    try {
-        const response = await axios.put(`/api/info/${infoId}`, info)
-        .then((res)=> updateResult = res.data);
+    const response = await axios.put(`/api/info/${infoId}`, info);
+    const data = await response.data;
 
-        
-    } catch {
-
-    }
-    return updateResult;
+    return data;
 }

@@ -8,8 +8,9 @@ const Description = ({ personId }) => {
   const [infos, setInfos] = useState([]);
 
   useEffect(() => {
-    const data = fetchPersonInfo(personId);
-    data.then(result => setInfos(result))
+    const data = fetchPersonInfo(personId)
+      .then(result => setInfos(result))
+      .catch(error => alert(error.response.data.message));
   }, []);
   return (
     <Paper style={{ padding: 16 }}>

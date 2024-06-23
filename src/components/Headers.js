@@ -10,7 +10,7 @@ import { fetchPersonNames } from '../api/FetchPerson';
 import { Button, Input } from '@mui/joy';
 import { useAutocomplete } from '@mui/base/useAutocomplete';
 import mainLogo from '../assets/mainLogo.png';
-import { fetchLogout, fetchUserList} from '../api/FectUser';
+import { fetchLogout, fetchUserList } from '../api/FectUser';
 
 
 const InputWrapper = styled('div')(({ theme }) => ({
@@ -55,18 +55,15 @@ const CustomButton = styled(Button)(({ theme }) => ({
 
 export default function SearchAppBar() {
   const [personList, setPersonList] = React.useState([]);
-  const [userList, setUserList] = React.useState([]);
   const [value, setValue] = React.useState(''); // 검색어 상태 추가
   const [userCookie, setUserCookie] = React.useState(null);
 
-  
-  React.useEffect(() => {
-    fetchPersonNames().then((data) => setPersonList(data));
-  }, []);
 
-  React.useEffect(()=>{
-    fetchUserList().then((data) => setUserList(data))
-  },[])
+  React.useEffect(() => {
+    fetchPersonNames()
+      .then((data) => setPersonList(data))
+      .catch(error => alert(error.response.data.message));
+  }, []);
 
   React.useEffect(() => {
     // 쿠키에서 사용자 정보 가져오기
@@ -113,9 +110,9 @@ export default function SearchAppBar() {
     if (personId) {
       document.location.href = `/person/${personId}`;
     }
-  else{
-    alert('해당 인물이 존재하지 않습니다!');
-  }
+    else {
+      alert('해당 인물이 존재하지 않습니다!');
+    }
   };
 
 
@@ -132,11 +129,11 @@ export default function SearchAppBar() {
     });
   };
 
-// 쿠키 삭제 함수
+  // 쿠키 삭제 함수
   const deleteCookie = (name) => {
     document.cookie = `${name}=; Max-Age=-1; path=/`;
   };
-// 쿠키 가져오는 함수
+  // 쿠키 가져오는 함수
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -150,7 +147,7 @@ export default function SearchAppBar() {
     <Box sx={{ flexGrow: 1, width: '100vw' }}>
       <AppBar position="static" sx={{ bgcolor: 'green', padding: '0 10px' }}>
         <Toolbar>
-          <Button padding={"0 3vw"} onClick={()=>{document.location.href="/"}} color='transparent'>
+          <Button padding={"0 3vw"} onClick={() => { document.location.href = "/" }} color='transparent'>
             <img src={mainLogo} width={"100px"} />
           </Button>
           < Typography
@@ -182,7 +179,7 @@ export default function SearchAppBar() {
           <CustomButton type="submit" variant="contained" color="primary" onClick={submitHandler}>
             검색
           </CustomButton>
- 
+
           {userCookie ? (
             <>
               <Typography variant="contained" color="neutral">
@@ -194,7 +191,7 @@ export default function SearchAppBar() {
             </>
           ) : (
             <>
-            <CustomButton variant="contained" color="neutral" onClick={() => { document.location.href = "/login" }}>
+              <CustomButton variant="contained" color="neutral" onClick={() => { document.location.href = "/login" }}>
                 LOGIN
               </CustomButton>
               <CustomButton variant="contained" color="neutral" onClick={() => { document.location.href = "/sign-up" }}>
