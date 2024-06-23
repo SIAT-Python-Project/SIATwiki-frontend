@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { fetchUserSingup } from '../api/FectUser';
+import BaseComponent from '../components/BaseComponents';
 
 function Copyright(props) {
   return (
@@ -53,6 +54,7 @@ export default function SignUpPage() {
 
 
   return (
+    <BaseComponent>
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -128,5 +130,6 @@ export default function SignUpPage() {
         <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
+    </BaseComponent>
   );
 }
