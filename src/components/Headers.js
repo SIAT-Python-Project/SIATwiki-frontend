@@ -169,7 +169,7 @@ export default function SearchAppBar() {
             />
             {groupedOptions.length > 0 ? (
               <Listbox {...getListboxProps()}>
-                {groupedOptions.slice(0, 5).map((option, index) => (
+                {groupedOptions.map((option, index) => (
                   <li {...getOptionProps({ option, index })} key={option.name} style={{ padding: '5px' }}>
                     {option.name}
                   </li>
