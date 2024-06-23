@@ -47,21 +47,36 @@ export default function SingInPage({ data }) {
   };
 
 
-  const handleSubmit = async(event) => {
-    event.preventDefault();
+
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      console.log(userLogin.email);
+      try {
+        const response = await axios.post('/api/login', userLogin);
+        // setCookie('name', response.name, { path: '/' });
+        // setCookie('email', response.email, { path: '/' });
+        // setCookie('id', response.id, { path: '/' });
+          navigate('/');
+        
+      } catch (error) {
+        alert('아이디 또는 패스워드가 맞지 않습니다');
+      }
     
-    fetchUserLogin(userLogin.email, userLogin.password, userLogin.id)
-      .then((response) => {
-        // const encryptedId = encrypt(response.id);
-        // 쿠키 설정
-        setCookie('name', encodeURIComponent(response.name));
-        setCookie('email', response.email);
-        setCookie('id', response.id)
-        navigate(`/`);
-      })
-      .catch(error => {
-        alert("아이디 또는 패스워드가 맞지 않습니다");
-      });
+
+
+    
+    // fetchUserLogin(userLogin.email, userLogin.password, userLogin.id)
+    //   .then((response) => {
+    //     // const encryptedId = encrypt(response.id);
+    //     // 쿠키 설정
+    //     setCookie('name', encodeURIComponent(response.name));
+    //     setCookie('email', response.email);
+    //     setCookie('id', response.id)
+    //     navigate(`/`);
+    //   })
+    //   .catch(error => {
+    //     alert("아이디 또는 패스워드가 맞지 않습니다");
+    //   });
   };
 
   // const encrypt = (value) => {
