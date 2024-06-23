@@ -2,24 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Headers from '../components/Headers';
 import CreateInfoTable from '../components/CreateInfoTable';
+import MainPageWrapper from '../components/MainPageWrapper';
+import BaseComponent from '../components/BaseComponents';
 
 
-
-const MainPageWrapper = styled.div`
-  width: 100%;
-  background: #cecece;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: 'bmdohyeon';
-  font-size: 2.5vmin;
-  overflow-x:auto;
-  height:100vh;
-  @media screen and (max-width: 768px) {
-    font-size: 4vmin;
-  }
-  
-`;
 
 const MainInfoContainer = styled.div`
     background:white;
@@ -28,19 +14,6 @@ const MainInfoContainer = styled.div`
 
 `;
 
-
-const Container = styled.div`
-  background: blue;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  margin-top:30px;
-  width:80%;
-  justify-content:center;
-  @media screen and (max-width: 768px) {
-    flex-direction:column;
-  }
-`;
 
 const TimeStampContainer = styled.div`
   font-size:13px;
@@ -57,27 +30,21 @@ const TableWrapper = styled.div`
 
 
 
-function MainPage() {
+function CreatePersonPage() {
 //부모에서 객체수정 함수를 받아와야함~
   const [data, setData] = useState({});
 
   return (
-    <div>
-      
-      <MainPageWrapper>
-      <Headers />
-        <Container>
-        
+    <BaseComponent>
         <MainInfoContainer>
             <TableWrapper>
             <h3> 새로운 인물을 등록하고 싶나요?</h3>
                 <CreateInfoTable></CreateInfoTable>
             </TableWrapper>
         </MainInfoContainer>
-        </Container>
-      </MainPageWrapper>
-    </div>
+    </BaseComponent>
+       
   );
 }
 
-export default MainPage;
+export default CreatePersonPage;

@@ -15,6 +15,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import BaseComponent from '../components/BaseComponents';
 
 
 
@@ -59,6 +60,7 @@ export default function SingInPage({ data }) {
 
 
   return (
+    <BaseComponent>
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -125,5 +127,6 @@ export default function SingInPage({ data }) {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+    </BaseComponent>
   );
 }

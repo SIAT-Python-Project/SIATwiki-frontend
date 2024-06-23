@@ -9,21 +9,8 @@ import '../css/markdown.css'
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/a11y-dark.css";
 import rehypeRaw from "rehype-raw";
+import BaseComponent from '../components/BaseComponents';
 
-const MainPageWrapper = styled.div`
-  width: 100%;
-  background: #cecece;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: 'bmdohyeon';
-  font-size: 2.5vmin;
-  overflow-x:auto;
-  @media screen and (max-width: 768px) {
-    font-size: 4vmin;
-  }
-  
-`;
 
 const UpdateContainer = styled.div`
   background: white ;
@@ -32,20 +19,6 @@ const UpdateContainer = styled.div`
   width: 100%;
   &::-webkit-scrollbar {
     display: none;
-  }
-`;
-
-const Container = styled.div`
-  position: relative;
-  background: blue;
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content:space-between;
-  width:60vw;
-  margin-top:30px;
-  @media screen and (max-width: 768px) {
-    flex-direction:column;
   }
 `;
 
@@ -108,30 +81,25 @@ function UpdateInfo() {
     }, []);
 
     return (
-        <div>
-            <Headers />
-            <MainPageWrapper>
-                <Container>
-                    <UpdateContainer>
-                        <UpdateHeader>
-                            <h2>
-                                {info.category}
-                            </h2>
-                            <RanderingBtn onClick={() => setMarkdwon(textarea.current.value)}> [ 랜더링 ] </RanderingBtn>
-                        </UpdateHeader>
-                        <UpdateForm onSubmit={UpdateInfoHandler}>
-                            <UpdateTextArea ref={textarea} cols={135} rows={25} defaultValue={info.content}></UpdateTextArea>
-                            <UpdateBtn type='submit'>수정</UpdateBtn>
-                        </UpdateForm>
+        <BaseComponent>
+            <UpdateContainer>
+                <UpdateHeader>
+                    <h2>
+                        {info.category}
+                    </h2>
+                    <RanderingBtn onClick={() => setMarkdwon(textarea.current.value)}> [ 랜더링 ] </RanderingBtn>
+                </UpdateHeader>
+                <UpdateForm onSubmit={UpdateInfoHandler}>
+                    <UpdateTextArea ref={textarea} cols={135} rows={25} defaultValue={info.content}></UpdateTextArea>
+                    <UpdateBtn type='submit'>수정</UpdateBtn>
+                </UpdateForm>
 
-                        <hr />
-                        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight, rehypeRaw]}>
-                            {markdwon}
-                        </ReactMarkdown>
-                    </UpdateContainer>
-                </Container>
-            </MainPageWrapper>
-        </div>
+                <hr />
+                <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight, rehypeRaw]}>
+                    {markdwon}
+                </ReactMarkdown>
+            </UpdateContainer>
+        </BaseComponent>
     );
 }
 

@@ -6,23 +6,7 @@ import Description from '../components/Description';
 import InfoTable from '../components/InfoTable';
 import { fetchPersonProfile } from '../api/FetchPerson';
 import { useParams } from 'react-router-dom';
-
-
-
-const MainPageWrapper = styled.div`
-  width: 100%;
-  background: #cecece;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: 'bmdohyeon';
-  font-size: 2.5vmin;
-  overflow-x:auto;
-  @media screen and (max-width: 768px) {
-    font-size: 4vmin;
-  }
-  
-`;
+import BaseComponent from '../components/BaseComponents';
 
 const InfoContainer = styled.div`
   background: white ;
@@ -36,19 +20,6 @@ const InfoContainer = styled.div`
 
 `;
 
-const Container = styled.div`
-  position: relative;
-  background: blue;
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content:space-between;
-  width:60vw;
-  margin-top:30px;
-  @media screen and (max-width: 768px) {
-    flex-direction:column;
-  }
-`;
 
 const TimeStampContainer = styled.div`
   font-size:13px;
@@ -87,10 +58,7 @@ function PersonPage() {
     , []);
 
   return (
-    <div>
-      <Headers />
-      <MainPageWrapper>
-        <Container>
+    <BaseComponent>
 
           <InfoContainer>
             <h1>{data.name}</h1>
@@ -108,9 +76,8 @@ function PersonPage() {
 
             <Description personId={id} />
           </InfoContainer>
-        </Container>
-      </MainPageWrapper>
-    </div>
+    </BaseComponent>
+
   );
 }
 
