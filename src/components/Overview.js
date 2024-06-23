@@ -17,27 +17,27 @@ const Wrapper = styled.div`
 `;
 
 const Overview = () => {
-  
-  const [names,setNames] = useState([]);
+
+  const [names, setNames] = useState([]);
 
   useEffect(() => {
     fetchCategoryNames()
-    .then(data => setNames(data))
-    .then(names.sort((a,b)=>a.order - b.order)); //order 순으로 정렬
-  }
-    , [names]);
+      .then(data => setNames(data))
+      .then(names.sort((a, b) => a.order - b.order))
+      .catch(error => alert(error.response.data.message)); //order 순으로 정렬
+  }, []);
 
   return (
     <Wrapper>
       <Typography variant="h5" component="h2">
-        목차<br/>
+        목차<br />
       </Typography>
       <Typography component="p">
-      <ul style={{'list-style-type':"none"}}>
-        {names && names.map((name) => (
-          <li key={name.order}>{name.order+1}.{name.krName}</li>
-        ))}
-      </ul>
+        <ul style={{ 'list-style-type': "none" }}>
+          {names && names.map((name) => (
+            <li key={name.order}>{name.order + 1}.{name.krName}</li>
+          ))}
+        </ul>
       </Typography>
     </Wrapper>
   );
