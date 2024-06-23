@@ -4,6 +4,7 @@ import Headers from '../components/Headers';
 
 const MainPageWrapper = styled.div`
   width: 100%;
+  height: 100vh;
   background: #cecece;
   display: flex;
   flex-direction: column;
@@ -18,13 +19,16 @@ const MainPageWrapper = styled.div`
 
 const Container = styled.div`
   position: relative;
-  background: blue;
+  border: solid 2px;
+  border-color: #b5b5b5;
   padding: 10px;
+  border-radius:10px;
+  background: white;
   display: flex;
   flex-direction: row;
   justify-content:space-between;
   width:60vw;
-  margin-top:30px;
+  margin:30px auto;
   @media screen and (max-width: 768px) {
     flex-direction:column;
   }

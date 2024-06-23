@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Headers from '../components/Headers';
 import Overview from '../components/Overview';
 import Description from '../components/Description';
 import InfoTable from '../components/InfoTable';
@@ -20,7 +19,6 @@ const InfoContainer = styled.div`
 
 `;
 
-
 const TimeStampContainer = styled.div`
   font-size:13px;
   padding: 20px 0px;
@@ -31,8 +29,10 @@ const TableAndOverView = styled.div`
     display:flex;
     flex-direction:row;
     justify-content:space-between;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 968px) {
     flex-direction:column;
+    margin: auto auto;
+    width:300px
   }
 `
 
@@ -72,8 +72,6 @@ function PersonPage() {
               <Overview />
               <InfoTable data={data} />
             </TableAndOverView>
-
-
             <Description personId={id} />
           </InfoContainer>
     </BaseComponent>
