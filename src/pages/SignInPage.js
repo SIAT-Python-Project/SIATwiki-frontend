@@ -45,16 +45,16 @@ export default function SingInPage({ data }) {
 
 
 
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-      console.log(userLogin.email);
-      try {
-        const response = await axios.post('/api/login', userLogin);
-        navigate('/');
-        
-      } catch (error) {
-        alert('아이디 또는 패스워드가 맞지 않습니다');
-      }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(userLogin.email);
+    try {
+      const response = await axios.post('/api/login', userLogin);
+      navigate('/');
+
+    } catch (error) {
+      alert(error.response.data.message);
+    }
   };
 
 
