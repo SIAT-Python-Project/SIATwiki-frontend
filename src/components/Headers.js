@@ -124,8 +124,6 @@ export default function SearchAppBar() {
     fetchLogout().then(() => {
 
       setUserCookie(null);
-
-
       // 쿠키 삭제
       deleteCookie('email');
       deleteCookie('name');
