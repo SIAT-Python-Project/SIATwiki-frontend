@@ -27,13 +27,30 @@ export async function updatePersonProfile(personId, updatedContent) {
 }
 
 //POST
-export async function createPersonProfile(personId, createdContent) {
-    try {
-        const response = await axios.post(`/api/person/${personId}`, createdContent);
-        console.log(response.data);
-    } catch (e) {
-        console.log(e);
+export async function createPersonProfile(createdContent,imgFile) {
+    const formData = new FormData();
+
+    // 이미지 파일 추가
+    if (imgFile != null) {
+        formData.append('file', imgFile);
     }
+
+    // JSON 데이터 추가
+    const profileInfoJSON = JSON.stringify(createdContent);
+    formData.append('person', new Blob([profileInfoJSON], { type: 'application/json' }));
+
+    try {
+        const response = await axios.post('/api/person'
+                                        , formData
+                                        , {headers: {'Content-Type': 'multipart/form-data'}}
+                                        );
+            
+        const userInfo = await response.data;
+        return userInfo; 
+    } catch (e) {
+        console.error('Error:', e);
+    }
+
 }
 
 //DELETE

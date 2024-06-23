@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { styled } from '@mui/system';
 import defaultImage from '../assets/default.jpg';
-import { TextField } from '@mui/joy';
-
+import { Input } from '@mui/joy';
+import { createPersonProfile } from '../api/FetchPerson';
 const GreenTableCell = styled(TableCell)({
   backgroundColor: 'green',
   color: 'white',
@@ -21,22 +21,46 @@ const ImgWrapper = styled('div')({
 const Wrapper = styled('div')({
 });
 
+const ProfileSettingWrapper= styled('div')({
+  display:"flex",
+  flexDirection:"column",
+  justifyContent:"center",
+  textAlign:"cetner"
+})
 
-const CreateInfoTable = () => {
-
+const CreateInfoTable = (profileInfo,setProfileInfo) => {
+ //TODO
+ //리팩토링: 부모로부터 객체 단위로 수정하는 함수를 받아와 필드 수정예정
   const [name, setName] = useState('');
   const [mbti, setMbti] = useState('');
   const [email, setEmail] = useState('');
   const [github, setGithub] = useState('');
+  const [profileImg,setProfileImg] = useState("");
 
+  const imgRef = useRef();
+    
+    // 이미지 업로드 input의 onChange
+  const saveImgFile = () => {
+    const file = imgRef.current.files[0];
+    const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setProfileImg(reader.result);
+      };
+      
+  };
   const handleSubmit = async () => {
+
     const profileData = {
-      name,
-      mbti,
-      email,
-      github,
-      filePath: defaultImage // 기본 이미지 사용
+      "name": name,
+      "mbti": mbti,
+      "email": email,
+      "github": github,
+      "userId":1 //TODO: userId 불러오는 로직 필요함ㅠㅠ
     };
+
+    const userId = createPersonProfile(profileData,imgRef.current.files[0])
+                    .then(data => document.location.href=`/person/${data.id}`);
   }
 
   return (
@@ -46,43 +70,56 @@ const CreateInfoTable = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <GreenTableCell colSpan={2}>이름!</GreenTableCell>
+            <GreenTableCell colSpan={2}>추가할 인물 정보를 입력하세요</GreenTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {/* 이미지 셀 */}
           <TableRow>
             <TableCell colSpan={2} align="center">
-              <div>
-                <img width="300px" src={defaultImage} alt="default" />
+              <ProfileSettingWrapper>
+                <div>
+                <img width="300px" src=  {profileImg ? profileImg :defaultImage}
+                alt="프로필 이미지" />
+                </div>
+                <div>
+                <input 
+                    id="file-upload-input"
+                    type="file"
+                    name="file"
+                    multiple
+                    onChange={saveImgFile}
+                    ref = {imgRef}
+                />
+                </div>
+                </ProfileSettingWrapper>
                 {/* <img width="300px" src={`http://localhost:8080/profile/${profile.filePath}`} alt="profile" /> */}
-              </div>
             </TableCell>
           </TableRow>
           <TableRow>
             <GreenTableCell>이름</GreenTableCell>
             <TableCell>
-              {/* <TextField
+              <Input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 fullWidth
-              /> */}
+              />
             </TableCell>
           </TableRow>
           <TableRow>
             <GreenTableCell>MBTI</GreenTableCell>
             <TableCell>
-              {/* <TextField
+              <Input
                 value={mbti}
                 onChange={(e) => setMbti(e.target.value)}
                 fullWidth
-              /> */}
+              />
             </TableCell>
           </TableRow>
           <TableRow>
             <GreenTableCell>email</GreenTableCell>
             <TableCell>
-              <TextField
+              <Input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 fullWidth
@@ -92,7 +129,7 @@ const CreateInfoTable = () => {
           <TableRow>
             <GreenTableCell>GitHub</GreenTableCell>
             <TableCell>
-              <TextField
+              <Input
                 value={github}
                 onChange={(e) => setGithub(e.target.value)}
                 fullWidth
