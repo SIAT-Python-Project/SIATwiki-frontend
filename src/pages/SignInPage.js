@@ -56,7 +56,7 @@ export default function SingInPage({ data }) {
         setCookie('name', encodeURIComponent(response.name));
         setCookie('email', response.email);
         setCookie('id',response.id)
-        navigate(`/person/${response.id}`);
+        navigate(`/`);
       })
       .catch(error => {
         alert("아이디 또는 패스워드가 맞지 않습니다");
