@@ -12,7 +12,8 @@ const WrapperContainer = styled.div`
 `
 const Title = styled.div`
     padding: 30px 0;
-    font-weight:bold
+    font-weight:bold;
+    color:#439F86
 `
 
 function MainPage() {
@@ -42,7 +43,13 @@ function MainPage() {
         어떤 기술 스택에 관심있어 하는지
         <br></br>
         알 기회가 없었습니다...🤔
-        <Box padding={'10px 0'}></Box>
+        <br></br>
+        .
+        <br></br>
+        .
+        <br></br>
+        <Box padding={'30px 0'}></Box>
+        그래서 생각해봤는데요,
         <br></br>
         내 정보를 알기 쉽게 문서화해보면 어떨까요?
 

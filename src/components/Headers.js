@@ -9,7 +9,7 @@ import { Button, Input } from '@mui/joy';
 import { useAutocomplete } from '@mui/base/useAutocomplete';
 import mainLogo  from '../assets/mainLogo.png';
 import { fetchLogout, fetchUserList } from '../api/FectUser';
-
+import textLogo from '../assets/textLogo.png'
 
 const InputWrapper = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -154,7 +154,10 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, width: '70%' }}
           >
-            씨앗위키
+            <Button onClick={()=>{document.location.href='/'}} style={{background:'transparent'}}>
+              <img src={textLogo} style={{width:'120px',marginTop:'10px'}}/>
+            </Button>
+            
           </Typography>
           <InputWrapper>
             <Input
