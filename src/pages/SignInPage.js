@@ -15,8 +15,6 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { fetchUserLogin } from '../api/FectUser';
-import { useCookies } from "react-cookie";
 
 
 
@@ -39,7 +37,6 @@ function Copyright(props) {
 
 export default function SingInPage({ data }) {
   const [userLogin, setUserLogin] = useState({ email: "", password: "", id: "" });
-  const [cookies, setCookie, removeCookie] = useCookies(['name','email','id']);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -53,35 +50,13 @@ export default function SingInPage({ data }) {
       console.log(userLogin.email);
       try {
         const response = await axios.post('/api/login', userLogin);
-        // setCookie('name', response.name, { path: '/' });
-        // setCookie('email', response.email, { path: '/' });
-        // setCookie('id', response.id, { path: '/' });
-          navigate('/');
+        navigate('/');
         
       } catch (error) {
         alert('아이디 또는 패스워드가 맞지 않습니다');
       }
-    
-
-
-    
-    // fetchUserLogin(userLogin.email, userLogin.password, userLogin.id)
-    //   .then((response) => {
-    //     // const encryptedId = encrypt(response.id);
-    //     // 쿠키 설정
-    //     setCookie('name', encodeURIComponent(response.name));
-    //     setCookie('email', response.email);
-    //     setCookie('id', response.id)
-    //     navigate(`/`);
-    //   })
-    //   .catch(error => {
-    //     alert("아이디 또는 패스워드가 맞지 않습니다");
-    //   });
   };
 
-  // const encrypt = (value) => {
-  //   return value; 
-  // };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -139,11 +114,6 @@ export default function SingInPage({ data }) {
               Sign In
             </Button>
             <Grid container>
-              {/* <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid> */}
               <Grid item>
                 <Link href="/sign-up" variant="body2">
                   {"회원가입"}
