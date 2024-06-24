@@ -169,7 +169,7 @@ export default function SearchAppBar() {
             />
             {groupedOptions.length > 0 ? (
               <Listbox {...getListboxProps()}>
-                {groupedOptions.slice(0, 5).map((option, index) => (
+                {groupedOptions.map((option, index) => (
                   <li {...getOptionProps({ option, index })} key={option.name} style={{ padding: '5px' }}>
                     {option.name}
                   </li>
@@ -183,7 +183,7 @@ export default function SearchAppBar() {
 
           {userCookie ? (
             <>
-              <div style={{minWidth:"50px", textAlign:"center"}}>
+              <div style={{width:'100px', fontSize: '1rem' ,textAlign:"center"}}>
                 {userCookie.name}
               </div>
               <CustomButton variant="contained" color="neutral" onClick={logoutHandleSubmit}>
