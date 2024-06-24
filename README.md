@@ -81,6 +81,6 @@
 | 이름 | 담당 업무 |
 | ------ | ------ |
 | 김지혜 | ~바지사장~, Frontend, 아이디어 기획, Person CRUD |
-| 배창민 | Backend (User CRUD, Authentication with Cookie) |
-| 장희권 | ~진짜사장~, DBA, Backend ( Global Exception Handling, Info CRUD, File server),CI  |
+| 배창민 | Backend (User CRUD, Cookie 관리) |
+| 장희권 | ~진짜사장~, DBA, Backend ( Authentication, Global Exception Handling, Info CRUD, File server),CI  |
 
