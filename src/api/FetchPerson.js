@@ -41,16 +41,18 @@ export async function createPersonProfile(createdContent, imgFile) {
 
 
     try{
-    const response = await axios.post('/api/person'
-        , formData
-        , { headers: { 'Content-Type': 'multipart/form-data' } }
-    );
-    
-    const regexp = /^https:\/\/github\.com\//;
-    const userInfo = await response.data;
-    if (!regexp.test(response.data.github)) {
-        throw Error("깃허브 주소 형식이 올바르지 않아요")
+
+        const regexp = /^https:\/\/github\.com\//;
+    if (!regexp.test(createdContent)) {
+        document.location.href='/person/creation';
+        alert("깃허브 주소 형식이 올바르지 않습니다.");
     }else{
+       
+        const response = await axios.post('/api/person'
+            , formData
+            , { headers: { 'Content-Type': 'multipart/form-data' } }
+        );
+        const userInfo = await response.data;
         return userInfo
     }
 } catch(error){
