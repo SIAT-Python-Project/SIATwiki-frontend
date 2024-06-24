@@ -8,11 +8,6 @@
 4. [와이어프레임](#4.-와이어프레임)
 5. [역할](#5.-역할)
 
-
-## 1. 웹 서비스 소개
-
-
-
 <!-- GETTING STARTED -->
 ## Getting Started
 1.  Clone the repo
@@ -24,6 +19,8 @@
   npm i
   npm run start
   ```
+
+## 1. 웹 서비스 소개
 
 <img src="https://velog.velcdn.com/images/cocoa389/post/85ea386f-e6d5-4449-b764-00f626d179cf/image.png" width="50%" height="50%"/>
 
