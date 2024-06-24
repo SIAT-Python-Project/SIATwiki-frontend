@@ -1,4 +1,4 @@
-# 씨앗위키 - Frontend
+# 씨앗위키 - Frontend 💚
 씨앗 A반 사람들의 정보를 문서화할 수 있는 위키 서비스
 
 ## 목차
@@ -12,11 +12,18 @@
 ## 1. 웹 서비스 소개
 
 
-> **How to start**
-```js
-npm i
-npm run start
-```
+
+<!-- GETTING STARTED -->
+## Getting Started
+1.  Clone the repo
+```sh
+   git clone https://github.com/SIAT-Python-Project/SIATwiki-frontend.git
+  ```
+2. Build Project
+  ```sh
+  npm i
+  npm run start
+  ```
 
 <img src="https://velog.velcdn.com/images/cocoa389/post/85ea386f-e6d5-4449-b764-00f626d179cf/image.png" width="50%" height="50%"/>
 
