@@ -50,7 +50,7 @@ function MainPage() {
         <Box padding={'30px 0'}></Box>
         그래서 생각해봤는데요,
         <br></br>
-        내 정보를 알기 쉽게 문서화해보면 어떨까요?
+        <Title>내 정보를 알기 쉽게 문서화해보면 어떨까요?</Title>
 
 
         <Button
