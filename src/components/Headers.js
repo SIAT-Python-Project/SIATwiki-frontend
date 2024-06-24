@@ -183,7 +183,7 @@ export default function SearchAppBar() {
 
           {userCookie ? (
             <>
-              <div style={{minWidth:"50px", textAlign:"center"}}>
+              <div style={{width:'100px', fontSize: '1rem' ,textAlign:"center"}}>
                 {userCookie.name}
               </div>
               <CustomButton variant="contained" color="neutral" onClick={logoutHandleSubmit}>

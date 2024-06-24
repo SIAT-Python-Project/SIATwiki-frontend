@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Button, Container } from '@mui/material';
 import BaseComponent from '../components/BaseComponents';
-
+import MainImg from '../assets/main.png';
 const WrapperContainer = styled.div`
     height:100vh; 
     display:flex;
@@ -19,7 +19,6 @@ const Title = styled.div`
 function MainPage() {
 
   const [data, setData] = useState({});
-
   const params = useParams();
   const id = params.id;
 
@@ -32,7 +31,7 @@ function MainPage() {
       <Container component="main" maxWidth="xs" style={{textAlign:'center', fontSize:'1rem'}}>
         
         <Title>씨앗 위키에 오신 것을 환영합니다!</Title>
-        <hr></hr>
+        <img src={MainImg} style={{width:'200px'}}></img>
         <Box padding={'10px 0'}></Box>
         <Title>기획 의도</Title>
 
