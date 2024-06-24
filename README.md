@@ -72,8 +72,11 @@
   - 유저 정보 수정 : 위키 문서 내 개요,수정,프로젝트 지향점, 본인의 일하는 스타일 등등..수정 가능
   - 컴포넌트화 : Components의 템플릿화를 통한 Page 간결화
 
-## 4. 와이어프레임
-- 필수/선택 구현 기능을 바탕으로 상세한 와이어프레임을 작성하였다. : [아직 없어요ㅠㅠ](ㅠㅠ)
+## 4. Coming Soon
+- [ ] Overview와 Info Anchor 기능
+- [ ] 창에 입력값이 있는 상태에서 엔터 시 검색으로 넘어가도록 UX 개선
+
+<p align="right">(<a href="#SIAT-WIKI-Backend-yellow_heart">back to top</a>)</p>
 
 
 ## 5. 역할
